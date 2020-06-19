@@ -10,9 +10,9 @@ services:
     volumes:
       - db-data:/var/lib/postgresql/data
     environment:
-      - POSTGRES_DB=camunda
-      - POSTGRES_USER=camunda
-      - POSTGRES_PASSWORD=camunda
+      - POSTGRES_DB=${DB_NAME}
+      - POSTGRES_USER=${DB_USERNAME}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
 
   adminer:
     image: adminer
@@ -27,11 +27,11 @@ services:
     depends_on:
       - db
     environment:
-      - DB_DRIVER=org.postgresql.Driver
-      - DB_URL=jdbc:postgresql://db:5432/camunda
-      - DB_USERNAME=camunda
-      - DB_PASSWORD=camunda
-      - WAIT_FOR=db:5432
+      - DB_DRIVER=${DB_DRIVER}
+      - DB_URL=${DB_SCHEMA}${DB_NAME}
+      - DB_USERNAME=${DB_USERNAME}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - WAIT_FOR=${WAIT_FOR}
 
   proxy:
     image: nginx:1.16.0-alpine
